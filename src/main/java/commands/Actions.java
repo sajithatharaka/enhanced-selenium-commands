@@ -5,6 +5,10 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.Logs;
 
 public class Actions {
     private static WebDriver driver;
@@ -40,6 +44,15 @@ public class Actions {
         WaitUntil.visibility(element,timeOut);
         element.sendKeys(text);
     }
+
+    public static void getBrowserLog(){
+        Logs log=driver.manage().logs();
+        LogEntries logEntries=log.get(LogType.BROWSER);
+        log("======== Browser log - starts ========");
+        for(LogEntry logEntry:logEntries){
+            log(logEntry.getMessage()+"\n");
+        }
+        log("======== Browser log - ends ========");    }
 
     public static void log(String message) {
         System.out.println(message);
