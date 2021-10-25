@@ -51,4 +51,23 @@ public class WaitUntil {
         return isNotDisplayed;
     }
 
+    public static boolean waitForElementContentToDisplay(WebElement element,int timeOutInSeconds){
+        boolean _isContentDisplayed=false;
+        for(int i=0;i<timeOutInSeconds;i++){
+            String text=element.getAttribute("value");
+            if(text==null){
+                text=element.getText();
+            }
+            if(text!=null && !text.equals("")){
+                Actions.log(element.toString()+" is visible");
+                _isContentDisplayed=true;
+                break;
+            }else{
+                Actions.log(element.toString()+" is not visible");
+                Actions.sleep(1);
+            }
+        }
+        return _isContentDisplayed;
+    }
+
 }
